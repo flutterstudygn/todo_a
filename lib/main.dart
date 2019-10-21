@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:todo/repository/todo_repository.dart';
 
+import 'repository/todo_adapter_dummy.dart';
 import 'view/page_main.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  // create _todoRepository instance (singleton)
+  final TodoRepository _todoRepository =
+      TodoRepository.getInstance(TodoDummyAdapter());
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: MainPage(_todoRepository),
     );
   }
 }
