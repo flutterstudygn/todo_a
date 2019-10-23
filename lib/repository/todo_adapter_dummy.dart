@@ -4,7 +4,7 @@ import 'package:todo/repository/todo_adapter.dart';
 /*
  * Adapter using dummy data
  */
-class TodoDummyAdapter implements TodoAdapter {
+class TodoDummyAdapter extends TodoAdapter {
   static List<TodoItem> _items = [
     TodoItem(id: 0, title: 'Todo item 1'),
     TodoItem(id: 1, title: 'Todo item 2'),

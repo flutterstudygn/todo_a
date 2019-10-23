@@ -12,6 +12,21 @@ class TodoItem {
       isComplete: false,
     );
   }
+  factory TodoItem.map(Map map) {
+    var isComplete = map['isComplete'];
+    return TodoItem(
+      id: map['id'],
+      title: map['title'],
+      createTime: DateTime.parse(map['createTime']),
+      isComplete: isComplete is bool
+          ? isComplete
+          : (isComplete is int && isComplete == 1) ? true : false,
+    );
+  }
+
+  String display() {
+    return '$id [$title]\n $createTime';
+  }
 
   @override
   String toString() {

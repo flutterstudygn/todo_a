@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:todo/repository/todo_adapter.dart';
+import 'package:todo/repository/todo_adapter_db.dart';
 import 'package:todo/repository/todo_repository.dart';
 
-import 'repository/todo_adapter_dummy.dart';
 import 'view/page_main.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  // create _todoRepository instance (singleton)
+  TodoAdapter adapter = await TodoDbAdapter().init();
+  TodoRepository repo = TodoRepository.getInstance(adapter);
+
+  runApp(MyApp(repo));
+}
 
 class MyApp extends StatelessWidget {
-  // create _todoRepository instance (singleton)
-  final TodoRepository _todoRepository =
-      TodoRepository.getInstance(TodoDummyAdapter());
+  final TodoRepository _todoRepository;
+  MyApp(this._todoRepository);
 
   // This widget is the root of your application.
   @override
