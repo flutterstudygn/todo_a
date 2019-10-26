@@ -85,8 +85,8 @@ class TodoDbAdapter implements TodoAdapter {
     update.set(_title, todoItem.title);
     update.set(_isComplete, todoItem.isComplete);
 
-    int result = await _dbAdapter.update(update);
-    return todoItem..id = result;
+    await _dbAdapter.update(update);
+    return todoItem;
   }
 
   @override
