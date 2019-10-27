@@ -5,13 +5,7 @@ class TodoItem {
   bool isComplete;
 
   TodoItem({this.id, this.title, this.createTime, this.isComplete = false});
-  factory TodoItem.create(String title) {
-    return TodoItem(
-      title: title,
-      createTime: DateTime.now(),
-      isComplete: false,
-    );
-  }
+
   factory TodoItem.map(Map map) {
     var isComplete = map['isComplete'];
     return TodoItem(
@@ -31,5 +25,18 @@ class TodoItem {
   @override
   String toString() {
     return 'TodoItem{id: $id, title: $title, createTime: $createTime, isComplete: $isComplete}';
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'createTime': createTime.toIso8601String(),
+      'isComplete': isComplete,
+    };
+  }
+
+  TodoItem clone() {
+    return TodoItem.map(this.toMap());
   }
 }

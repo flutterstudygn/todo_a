@@ -69,9 +69,13 @@ class TodoDbAdapter implements TodoAdapter {
 
   @override
   Future<TodoItem> create(TodoItem todoItem) async {
+    if (todoItem.createTime == null) {
+      todoItem.createTime = DateTime.now();
+    }
+
     Insert insert = Insert(_tableName);
     insert.set(_title, todoItem.title);
-    insert.set(_createTime, todoItem.createTime ?? DateTime.now());
+    insert.set(_createTime, todoItem.createTime);
     insert.set(_isComplete, false);
 
     int result = await _dbAdapter.insert(insert);

@@ -37,6 +37,5 @@ class TodoListView extends StatelessWidget {
         );
       }),
     );
-    ;
   }
 }
