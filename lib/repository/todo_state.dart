@@ -4,7 +4,12 @@ import 'package:todo/repository/todo_repository.dart';
 
 class TodoState with ChangeNotifier {
   final TodoRepository _repo;
-  TodoState(this._repo);
+  TodoState(this._repo) {
+    _repo.getList().then((v) {
+      _todoList = v;
+      notifyListeners();
+    });
+  }
 
   List<TodoItem> _todoList;
   List<TodoItem> get todoList => _todoList;

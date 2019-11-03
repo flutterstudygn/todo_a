@@ -6,7 +6,9 @@ import 'package:todo/repository/todo_state.dart';
 
 class _TodoEditor {
   final TodoItem _item;
-  _TodoEditor(this._item);
+  _TodoEditor(this._item) {
+    _validStream.sink.add(_item?.title?.isNotEmpty);
+  }
 
   TodoItem get item => _item;
 
@@ -84,7 +86,7 @@ class EditNotifierPage extends StatelessWidget {
                     builder: (context, snapshot) {
                       return RaisedButton(
                         child: Text('저장'),
-                        onPressed: snapshot.data != false
+                        onPressed: snapshot.data == true
                             ? () async {
                                 await _editor.submit(context);
                                 Navigator.of(context).pop();
